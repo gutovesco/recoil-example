@@ -13,7 +13,7 @@ function UserInput() {
     }
 
     function submit(){
-        setUsernames(input)
+        setUsernames([...usernames, input])
         
         setInput('')
     }
