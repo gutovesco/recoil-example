@@ -2,8 +2,8 @@ import {selector} from 'recoil';
 import {usersList} from '../users'
 import {api} from '../../../services/api'
 
-export const charCountState = selector({
-    key: 'charCountState',
+export const usersFollowers = selector({
+    key: 'usersFollowers',
     get: async ({get}) => {
         const _usersList = get(usersList);
 
@@ -11,12 +11,14 @@ export const charCountState = selector({
             _usersList.map(username => api.get(`/users/${username}`))
         )
 
-        const followerMap = []
+        const followerMap = {}
 
         responses.forEach(response => {
             const {data} = response;
 
             followerMap[data.login] = data.followers
         })
+
+        return followerMap
     }
 })

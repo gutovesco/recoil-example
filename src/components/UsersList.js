@@ -1,14 +1,16 @@
 import React from 'react'
-import {useRecoilState} from 'recoil'
+import {useRecoilState, useRecoilValue} from 'recoil'
 import {usersList} from '../atom/users/users'
+import {usersFollowers} from '../atom/users/selectors/Followers'
 
 export default function UsersList() {
-    const [usernames, setUsernames] = useRecoilState(usersList)
+    const usernames = useRecoilValue(usersList)
+    const followersMap = useRecoilValue(usersFollowers)
 
     return (
         <ul>
             {usernames.map((username) => (
-                <li key={username}>{username}</li>
+                <li key={username}>{username} ({followersMap[username]})</li>
             ))}
         </ul>
     )

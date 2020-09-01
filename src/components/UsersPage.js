@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import {usersList} from '../atom/users/users'
+import { usersList } from '../atom/users/users'
 import UsersList from './UsersList'
 import { Link } from 'react-router-dom'
 
@@ -12,9 +12,9 @@ function UserInput() {
         setInput(e.target.value.trim())
     }
 
-    function submit(){
+    function submit() {
         setUsernames([...usernames, input])
-        
+
         setInput('')
     }
 
@@ -30,8 +30,10 @@ function UserInput() {
 export default function UsersPage() {
     return (
         <div style={{ width: '100vw', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 0 }}>
-            <UserInput/>
-            <UsersList/>
+            <UserInput />
+            <React.Suspense fallback={<h1>Loading...</h1>}>
+                <UsersList />
+            </React.Suspense>
             <Link to="/">Go back</Link>
         </div>
     )
